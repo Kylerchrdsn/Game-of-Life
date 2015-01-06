@@ -21,6 +21,19 @@ class Life::Field
       width.times{ row << Life::Cell.new }
       height.times{ @grid << row }
     end
+
+    #row = []
+    #@grid.first.length.times{ row << Life::Cell.new }
+    #lines = `tput lines`.to_i-3
+    #cols  = `tput cols`.to_i
+    #if @grid.length<lines
+      #(lines-@grid.length).times{ @grid << row }
+    #end
+    #if @grid.first.length<cols
+      #@grid.each do |r|
+        #(cols-@grid.first.length).times{ r << Life::Cell.new }
+      #end
+    #end
   end
   #***************************************
   def to_s
@@ -97,26 +110,26 @@ class Life::Field
   end
   #***************************************
   def check_neighbors i, j
+    #puts i
+    #puts j
+    #puts '--------'
     live_neighbors = 0
     neighbors      = {
       :ml => Life::Cell.new, :mr => Life::Cell.new, :tl => Life::Cell.new, :tm => Life::Cell.new, 
       :tr => Life::Cell.new, :bl => Life::Cell.new, :bm => Life::Cell.new, :br => Life::Cell.new
     }
     # top #
-    unless((i-1)<0)
-      neighbors[:tl] = (j-1<0 ? Life::Cell.new : @grid[i-1][j-1])
-      neighbors[:tm] = @grid[i-1][j]||Life::Cell.new
-      neighbors[:tr] = @grid[i-1][j+1]||Life::Cell.new
-    end
+    neighbors[:tl] = @grid[i-1][j-1]||Life::Cell.new
+    neighbors[:tm] = @grid[i-1][j]||Life::Cell.new
+    neighbors[:tr] = @grid[i-1][(j==(@grid.first.length-1) ? j-j : j+1)]||Life::Cell.new
     # middle #
-    neighbors[:ml] = (j-1 < 0 ? Life::Cell.new : @grid[i][j-1])
-    neighbors[:mr] = ((j+1) > (@grid[i].length-1) ? Life::Cell.new : @grid[i][j+1])
+    neighbors[:ml] = @grid[i][j-1]||Life::Cell.new
+    neighbors[:mr] = @grid[i][j+1]||Life::Cell.new
     # bottom #
-    unless((i+1)>(@grid.length-1))
-      neighbors[:bl] = (j-1<0 ? Life::Cell.new : @grid[i+1][j-1])
-      neighbors[:bm] = @grid[i+1][j]||Life::Cell.new
-      neighbors[:br] = @grid[i+1][j+1]||Life::Cell.new
-    end
+    i_val = (i==(@grid.length-1) ? i-i : i+1)
+    neighbors[:bl] = @grid[i_val][j-1]||Life::Cell.new
+    neighbors[:bm] = @grid[i_val][j]||Life::Cell.new
+    neighbors[:br] = @grid[i_val][(j==(@grid.first.length-1) ? j-j : j+1)]||Life::Cell.new
     neighbors.each do |k, v|
       if(v.alive?)
         live_neighbors += 1

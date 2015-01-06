@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 require 'rubygems'
-require 'life.rb'
+require_relative '../lib/life.rb'
 field = Life::Field.new([
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,1,1,0,1,0,1,0,1,0,1,1,0,1,0,0,0,1,1,0,1,0,1,0,1,0,1,1,0,1,0,0],
