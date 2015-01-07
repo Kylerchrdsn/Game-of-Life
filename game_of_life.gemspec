@@ -1,16 +1,16 @@
 Gem::Specification.new do |s|
   s.name        = %[game_of_life]
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.licenses    = ['MIT']
   s.summary     = %[An implementation of Conway's Game of Life.]
   s.authors     = ['Kyle Richardson']
   s.email       = 'kylerchrdsn@gmail.com'
-  s.files       = Dir['lib/**/*.rb']+['README.txt', 'LICENSE.txt']
-  s.executables = ['glider_gun.rb', 'garden_of_eden.rb']
+  s.files       = Dir['lib/**/*.rb']+['README.md', 'LICENSE']
+  s.executables = ['glider_gun.rb', 'garden_of_eden.rb', 'random.rb']
   s.description = %[
-    == Summary == 
+    == Summary ==
 
-      An implementation of Conway's Game of Life. The gem includes classes needed to make a field of cells, 
+      An implementation of Conway's Game of Life. The gem includes classes needed to make a field of cells,
     and iterate the field through a number of generations. This implementation does not use a toroidal array.
     This is a console program which is compatible with Linux, Mac OS, and Windows.
     The gem was built with a couple of executable scripts: 'garden_of_eden.rb' and 'glider_gun.rb'. These scripts will be added
